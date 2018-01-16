@@ -4,12 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import de.codecentric.boot.admin.config.EnableAdminServer;
 
 import java.util.Arrays;
 
 @SpringBootApplication
-//@EnableAdminServer
 @Slf4j
 public class AppMain {
     public static void main(String[] args) {
