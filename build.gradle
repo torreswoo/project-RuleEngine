@@ -1,0 +1,65 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+        versions = [
+                jdk                : '1.8',
+                lombok			   : '1.16.8',
+                logback			   : '1.1.7',	// Logging
+                log4j			   : '1.2.14',
+                slf4j			   : '1.7.21',
+                springfox          : '2.6.0'
+        ]
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.torres'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+
+    // SpringBoot | web
+	compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+
+	// SpringBoot | Actuator
+    // - doc - /docs
+    // - remote shell $> ssh user@localhost -p 2000
+	compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+	compile "org.springframework.boot:spring-boot-actuator-docs:${springBootVersion}"
+	compile "org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}"
+
+    // SpringBoot | Admin UI
+    compile "de.codecentric:spring-boot-admin-server:1.4.6"
+    compile "de.codecentric:spring-boot-admin-server-ui:1.4.6"
+    compile 'de.codecentric:spring-boot-admin-starter-client:1.4.6'
+
+    // Thymeleaf
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+    // Lombok & logging(@SLf4j)
+    compile "org.projectlombok:lombok:${versions.lombok}"
+
+    // Swagger
+    compile "io.springfox:springfox-swagger2:${versions.springfox}"
+    compile "io.springfox:springfox-swagger-ui:${versions.springfox}"
+
+
+}
+
