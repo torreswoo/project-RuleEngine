@@ -1,4 +1,4 @@
-package com.torres;
+package com.kakaopay;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

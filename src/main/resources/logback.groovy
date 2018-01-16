@@ -150,7 +150,7 @@ switch (_PROFILE){
 root(ROOT_LEVEL, [PRODUCT])
 
 //운영 로그
-logger("com.torres", APP_LEVEL, [PRODUCT], false)
+logger("com.kakaopay", APP_LEVEL, [PRODUCT], false)
 logger("org.springframework.web.client", APP_LEVEL, [PRODUCT], false)
 
 //예외 로그

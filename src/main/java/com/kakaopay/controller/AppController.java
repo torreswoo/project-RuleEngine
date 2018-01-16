@@ -1,7 +1,7 @@
-package com.torres;
+package com.kakaopay.controller;
 
 
-import com.torres.domain.FraudDetectResponse;
+import com.kakaopay.domain.FraudDetectResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -26,10 +26,10 @@ public class AppController {
         @ApiResponse(code = 404, message = "Not Found - Not Found. check user_id"),
         @ApiResponse(code = 500, message = "Internal Server Error") })
     public @ResponseBody FraudDetectResponse fraudDetectResponse(@PathVariable Long user_id){
-
+        log.info("[REQ] {} - start check Fraud Detection.", user_id);
         // TODO: check user_id is LONG?
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");
-        log.info("FraudDetectResponse");
+        log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
         return fraudDetectResponse;
     }
 

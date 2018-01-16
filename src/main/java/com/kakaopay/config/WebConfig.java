@@ -1,11 +1,9 @@
-package com.torres.config;
+package com.kakaopay.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.core.Ordered;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @Configuration

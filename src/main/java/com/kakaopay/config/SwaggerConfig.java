@@ -1,4 +1,4 @@
-package com.torres.config;
+package com.kakaopay.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ public class SwaggerConfig {
     @Value("${info.developer.url}")
     private String _developer_url;
 
-    private String _basePackage = "com.torres";
+    private String _basePackage = "com.kakaopay";
 
 
     @Bean
