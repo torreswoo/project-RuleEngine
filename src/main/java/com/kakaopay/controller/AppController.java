@@ -2,10 +2,13 @@ package com.kakaopay.controller;
 
 
 import com.kakaopay.domain.FraudDetectResponse;
+import com.kakaopay.repository.UserActionLogRepository;
+import com.kakaopay.repository.UserActionLogRepositoryCustom;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -31,6 +34,7 @@ public class AppController {
         log.info("[REQ] {} - start check Fraud Detection.", user_id);
 
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");
+
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
         return fraudDetectResponse;
     }

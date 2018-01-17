@@ -21,7 +21,7 @@ public class QUserActionLog extends EntityPathBase<UserActionLog> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final NumberPath<Long> user_id = createNumber("user_id", Long.class);
+    public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public QUserActionLog(String variable) {
         super(UserActionLog.class, forVariable(variable));

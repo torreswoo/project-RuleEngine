@@ -21,5 +21,5 @@ public class UserActionLog implements Serializable {
 
     @Column(name = "user_id")
     @Getter
-    private Long user_id;
+    private Long userId;
 }
