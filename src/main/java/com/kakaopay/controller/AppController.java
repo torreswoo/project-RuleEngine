@@ -26,8 +26,10 @@ public class AppController {
         @ApiResponse(code = 404, message = "Not Found - Not Found. check user_id"),
         @ApiResponse(code = 500, message = "Internal Server Error") })
     public @ResponseBody FraudDetectResponse fraudDetectResponse(@PathVariable Long user_id){
-        log.info("[REQ] {} - start check Fraud Detection.", user_id);
+
         // TODO: check user_id is LONG?
+        log.info("[REQ] {} - start check Fraud Detection.", user_id);
+
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
         return fraudDetectResponse;

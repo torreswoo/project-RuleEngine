@@ -55,4 +55,5 @@ $ thread top
 - http://localhost:8080/          # Swagger
 - http://localhost:8080/intro     # intro page (Thymeleaf)
 - http://localhost:8080/dashboard # App Dashboard
+- http://localhost:8080/console   # H2 console (URL : jdbc:h2:mem:mydb / username : sa)
 ```
