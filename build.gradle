@@ -11,7 +11,9 @@ buildscript {
 				h2				   : '1.4.190'
         ]
 	}
-	repositories {
+    ext.gradleScriptDir = "${project.getRootDir()}/gradle"
+
+    repositories {
 		mavenCentral()
 	}
 	dependencies {
@@ -35,18 +37,17 @@ repositories {
 dependencies {
 
     // SpringBoot | web
-	compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-	testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
-	compile("org.jolokia:jolokia-core:1.3.7")
+    compile("org.jolokia:jolokia-core:1.3.7")
 
-
-	// SpringBoot | Actuator
+    // SpringBoot | Actuator
     // - doc - /docs
     // - remote shell $> ssh user@localhost -p 2000
-	compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-	compile "org.springframework.boot:spring-boot-actuator-docs:${springBootVersion}"
-	compile "org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-actuator-docs:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}"
 
     // Thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
@@ -58,12 +59,14 @@ dependencies {
     compile "io.springfox:springfox-swagger2:${versions.springfox}"
     compile "io.springfox:springfox-swagger-ui:${versions.springfox}"
 
-	// datasource - JDBC & H2
-	compile "com.h2database:h2:$versions.h2"
-	compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+    // datasource - JDBC & H2
+    compile "com.h2database:h2:$versions.h2"
+    compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
 
-
-
-
+    // datasource - JPA & QueryDSL
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 }
+
+apply from: "$gradleScriptDir/querydsl.gradle"
+
 

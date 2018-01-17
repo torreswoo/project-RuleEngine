@@ -2,13 +2,17 @@ package com.kakaopay.config;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.h2.server.web.WebServlet;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
+@EntityScan({"com.kakaopay.entity"})
+@EnableJpaRepositories(basePackages = {"com.kakaopay.repository"})
 public class DatabaseConfig {
 
     // H2 Config (Only for URL mapping)
