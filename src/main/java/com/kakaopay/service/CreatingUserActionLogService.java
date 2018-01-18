@@ -18,12 +18,10 @@ public class CreatingUserActionLogService {
         return userActionLogRepository.findAllByUserId(userId);
     }
 
-    public int test(Long userId){
-
-        List<UserActionLog> userActionLogList = userActionLogRepository.test(userId);
-
-
-        return userActionLogList.size();
-    }
+//    public int test(Long userId){
+//
+//        List<UserActionLog> userActionLogList = userActionLogRepository.test(userId);
+//        return userActionLogList.size();
+//    }
 
 }

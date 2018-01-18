@@ -39,7 +39,7 @@ public class AppController {
 
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");
 
-        log.info("test {} ", creatingUserActionLogService.test(user_id));
+//        log.info("test {} ", creatingUserActionLogService.test(user_id));
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
         return fraudDetectResponse;
     }
