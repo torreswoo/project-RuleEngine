@@ -11,40 +11,44 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QServiceAccountLog is a Querydsl query type for ServiceAccountLog
+ * QMoneyChargingLog is a Querydsl query type for MoneyChargingLog
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QServiceAccountLog extends EntityPathBase<ServiceAccountLog> {
+public class QMoneyChargingLog extends EntityPathBase<MoneyChargingLog> {
 
-    private static final long serialVersionUID = -1724812131L;
+    private static final long serialVersionUID = -1889152542L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QServiceAccountLog serviceAccountLog = new QServiceAccountLog("serviceAccountLog");
+    public static final QMoneyChargingLog moneyChargingLog = new QMoneyChargingLog("moneyChargingLog");
 
     public final StringPath accountNumber = createString("accountNumber");
+
+    public final StringPath bankAccountNumber = createString("bankAccountNumber");
+
+    public final StringPath chargingMoney = createString("chargingMoney");
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final QUserActionLog userActionLog;
 
-    public QServiceAccountLog(String variable) {
-        this(ServiceAccountLog.class, forVariable(variable), INITS);
+    public QMoneyChargingLog(String variable) {
+        this(MoneyChargingLog.class, forVariable(variable), INITS);
     }
 
-    public QServiceAccountLog(Path<? extends ServiceAccountLog> path) {
+    public QMoneyChargingLog(Path<? extends MoneyChargingLog> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QServiceAccountLog(PathMetadata metadata) {
+    public QMoneyChargingLog(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QServiceAccountLog(PathMetadata metadata, PathInits inits) {
-        this(ServiceAccountLog.class, metadata, inits);
+    public QMoneyChargingLog(PathMetadata metadata, PathInits inits) {
+        this(MoneyChargingLog.class, metadata, inits);
     }
 
-    public QServiceAccountLog(Class<? extends ServiceAccountLog> type, PathMetadata metadata, PathInits inits) {
+    public QMoneyChargingLog(Class<? extends MoneyChargingLog> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.userActionLog = inits.isInitialized("userActionLog") ? new QUserActionLog(forProperty("userActionLog")) : null;
     }

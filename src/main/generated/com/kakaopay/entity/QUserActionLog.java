@@ -20,9 +20,17 @@ public class QUserActionLog extends EntityPathBase<UserActionLog> {
 
     public static final QUserActionLog userActionLog = new QUserActionLog("userActionLog");
 
+    public final DateTimePath<java.util.Date> actionTime = createDateTime("actionTime", java.util.Date.class);
+
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
+    public final ListPath<MoneyChargingLog, QMoneyChargingLog> moneyChargingLogs = this.<MoneyChargingLog, QMoneyChargingLog>createList("moneyChargingLogs", MoneyChargingLog.class, QMoneyChargingLog.class, PathInits.DIRECT2);
+
+    public final ListPath<MoneyReceivingLog, QMoneyReceivingLog> moneyReceivingLogs = this.<MoneyReceivingLog, QMoneyReceivingLog>createList("moneyReceivingLogs", MoneyReceivingLog.class, QMoneyReceivingLog.class, PathInits.DIRECT2);
+
     public final ListPath<ServiceAccountLog, QServiceAccountLog> serviceAccountLogs = this.<ServiceAccountLog, QServiceAccountLog>createList("serviceAccountLogs", ServiceAccountLog.class, QServiceAccountLog.class, PathInits.DIRECT2);
+
+    public final ListPath<TransferLog, QTransferLog> transferLogs = this.<TransferLog, QTransferLog>createList("transferLogs", TransferLog.class, QTransferLog.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
