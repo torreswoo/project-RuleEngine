@@ -4,6 +4,7 @@ package com.kakaopay.controller;
 import com.kakaopay.domain.FraudDetectResponse;
 import com.kakaopay.repository.UserActionLogRepository;
 import com.kakaopay.repository.UserActionLogRepositoryCustom;
+import com.kakaopay.service.CreatingUserActionLogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -16,6 +17,9 @@ import org.springframework.web.servlet.view.RedirectView;
 @RestController
 @Slf4j
 public class AppController {
+
+    @Autowired
+    private CreatingUserActionLogService creatingUserActionLogService;
 
     // Fraud Detection
     @ApiOperation(value = "Fraud Detection API using user_id")
@@ -35,6 +39,7 @@ public class AppController {
 
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");
 
+        log.info("test {} ", creatingUserActionLogService.test(user_id));
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
         return fraudDetectResponse;
     }
