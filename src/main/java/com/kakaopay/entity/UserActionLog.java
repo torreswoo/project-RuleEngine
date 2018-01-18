@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "user_action_log")
@@ -22,4 +23,9 @@ public class UserActionLog implements Serializable {
     @Column(name = "user_id")
     @Getter
     private Long userId;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
+    @Getter
+    private List<ServiceAccountLog> serviceAccountLogs;
+
 }
