@@ -43,7 +43,7 @@ public class UserActionLogRepositoryTest {
         List<UserActionLog> userActionLogs = userActionLogRepository.test(userID, testTime);
 
         // then
-        assertThat(userActionLogs.size()).isEqualTo(3);
+        assertThat(userActionLogs.size()).isEqualTo(8);
 
 
     }
