@@ -8,7 +8,8 @@ buildscript {
                 log4j			   : '1.2.14',
                 slf4j			   : '1.7.21',
                 springfox          : '2.6.0',
-				h2				   : '1.4.190'
+				h2				   : '1.4.190',
+                mysql              : '5.1.38'
         ]
 	}
     ext.gradleScriptDir = "${project.getRootDir()}/gradle"
@@ -61,6 +62,8 @@ dependencies {
 
     // datasource - H2
     compile "com.h2database:h2:$versions.h2"
+    // datasource - MySQL
+    compile "mysql:mysql-connector-java:$versions.mysql"
     // datasource - JDBC
     compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
     // datasource - JPA

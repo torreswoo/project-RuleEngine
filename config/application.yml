@@ -1,8 +1,10 @@
 spring.datasource:
-  plarform: h2
-  driverClassName: org.h2.Driver
-  url: jdbc:h2:mem:mydb;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
-#  url: jdbc:h2:tcp://localhost:9092/mem:testdb;MVCC=TRUE
+  platform: mysql
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/mydb
+#  plarform: h2
+#  driverClassName: org.h2.Driver
+#  url: jdbc:h2:mem:mydb;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
   username: sa
   password:
   initialize: true # classpath:/schema.sql, import.sql, data.sql
@@ -18,7 +20,8 @@ spring.datasource:
   validationQueryTimeout: 5
 
 spring.jpa:
-  database: H2
+#  database: H2
+  database: MYSQL
   properties.hibernate.hbm2ddl.auto: create  # update, none, verify
   properties.hibernate.format_sql: true
   properties.hibernate.use_sql_comments: true
