@@ -139,8 +139,8 @@ switch (_PROFILE){
     default: // local
 //        createServerAppenders()
         createLocalConsoleAppender()
-        QUERY_LEVEL = DEBUG
-        HIBERNATE_SQL_LEVEL = DEBUG
+        QUERY_LEVEL = INFO
+        HIBERNATE_SQL_LEVEL = OFF
         break;
 }
 

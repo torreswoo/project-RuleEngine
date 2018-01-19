@@ -3,6 +3,7 @@ package com.kakaopay.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "user_action_log")
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UserActionLog implements Serializable {
 
     @Id

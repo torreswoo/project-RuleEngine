@@ -16,15 +16,25 @@ public class UserActionLogRepositoryImpl
 
     @Override
     public List<UserActionLog> test(Long userId){
-        QServiceAccountLog qServiceAccountLog = QServiceAccountLog.serviceAccountLog;
+
         QUserActionLog qUserActionLog = QUserActionLog.userActionLog;
+
+        QServiceAccountLog qServiceAccountLog = QServiceAccountLog.serviceAccountLog;
+        QMoneyReceivingLog qMoneyReceivingLog = QMoneyReceivingLog.moneyReceivingLog;
+        QMoneyChargingLog qMoneyChargingLog = QMoneyChargingLog.moneyChargingLog;
+        QTransferLog qTransferLog = QTransferLog.transferLog;
 
         JPQLQuery query =
             from(qUserActionLog)
                 .join(qUserActionLog.serviceAccountLogs, qServiceAccountLog)
                 .fetchJoin()
+                .join(qUserActionLog.moneyReceivingLogs, qMoneyReceivingLog)
+                .fetchJoin()
+                .join(qUserActionLog.moneyChargingLogs, qMoneyChargingLog)
+                .fetchJoin()
+                .join(qUserActionLog.transferLogs, qTransferLog)
+                .fetchJoin()
                 .where(qUserActionLog.userId.eq(userId));
-
 
         return query.fetch();
 

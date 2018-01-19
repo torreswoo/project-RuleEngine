@@ -2,6 +2,7 @@ package com.kakaopay.controller;
 
 
 import com.kakaopay.domain.FraudDetectResponse;
+import com.kakaopay.entity.UserActionLog;
 import com.kakaopay.repository.UserActionLogRepository;
 import com.kakaopay.repository.UserActionLogRepositoryCustom;
 import com.kakaopay.service.CreatingUserActionLogService;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -36,6 +39,13 @@ public class AppController {
 
         // TODO: check user_id is LONG?
         log.info("[REQ] {} - start check Fraud Detection.", user_id);
+
+        // TEST: check all UserAction
+        List<UserActionLog> userActionLogList = creatingUserActionLogService.findAllUserActionLogByUserId(user_id);
+        log.info(" - {}", userActionLogList.size());
+        userActionLogList.stream().forEach(log -> System.out.println(log));
+
+
 
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");
 
