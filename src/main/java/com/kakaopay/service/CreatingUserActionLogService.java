@@ -5,6 +5,7 @@ import com.kakaopay.repository.UserActionLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,9 +18,9 @@ public class CreatingUserActionLogService {
         return userActionLogRepository.findAllByUserId(userId);
     }
 
-    public int test(Long userId){
-        List<UserActionLog> userActionLogList = userActionLogRepository.test(userId);
-        return userActionLogList.size();
+    public List<UserActionLog> test(Long userId, Date testTime) throws Exception{
+        List<UserActionLog> userActionLogList = userActionLogRepository.test(userId, testTime);
+        return userActionLogList;
     }
 
 }

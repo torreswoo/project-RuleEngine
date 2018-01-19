@@ -45,10 +45,8 @@ dependencies {
 
     // SpringBoot | Actuator
     // - doc - /docs
-    // - remote shell $> ssh user@localhost -p 2000
     compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-actuator-docs:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}"
 
     // Thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')

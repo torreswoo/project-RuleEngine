@@ -4,6 +4,7 @@ import com.kakaopay.entity.*;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserActionLogRepositoryImpl
@@ -15,7 +16,7 @@ public class UserActionLogRepositoryImpl
     }
 
     @Override
-    public List<UserActionLog> test(Long userId){
+    public List<UserActionLog> test(Long userId, Date testTime) throws Exception{
 
         QUserActionLog qUserActionLog = QUserActionLog.userActionLog;
 
@@ -26,17 +27,19 @@ public class UserActionLogRepositoryImpl
 
         JPQLQuery query =
             from(qUserActionLog)
-                .join(qUserActionLog.serviceAccountLogs, qServiceAccountLog)
+                .leftJoin(qUserActionLog.serviceAccountLogs, qServiceAccountLog)
                 .fetchJoin()
-                .join(qUserActionLog.moneyReceivingLogs, qMoneyReceivingLog)
+                .leftJoin(qUserActionLog.moneyReceivingLogs, qMoneyReceivingLog)
                 .fetchJoin()
-                .join(qUserActionLog.moneyChargingLogs, qMoneyChargingLog)
+                .leftJoin(qUserActionLog.moneyChargingLogs, qMoneyChargingLog)
                 .fetchJoin()
-                .join(qUserActionLog.transferLogs, qTransferLog)
+                .leftJoin(qUserActionLog.transferLogs, qTransferLog)
                 .fetchJoin()
                 .where(qUserActionLog.userId.eq(userId));
 
         return query.fetch();
 
     }
+
+
 }

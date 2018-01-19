@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,11 +41,17 @@ public class AppController {
         // TODO: check user_id is LONG?
         log.info("[REQ] {} - start check Fraud Detection.", user_id);
 
-        // TEST: check all UserAction
-        List<UserActionLog> userActionLogList = creatingUserActionLogService.findAllUserActionLogByUserId(user_id);
-        log.info(" - {}", userActionLogList.size());
-        userActionLogList.stream().forEach(log -> System.out.println(log));
-
+        try {
+            // TEST: check all UserAction
+            Date testTime = new Date();
+            log.info(" --- time : {}", testTime.getTime());
+            List<UserActionLog> userActionLogList = creatingUserActionLogService.test(user_id, testTime);
+            log.info(" - {}", userActionLogList.size());
+            userActionLogList.stream().forEach(log -> System.out.println(log));
+        }catch (Exception ex){
+            log.error("(SEND EXCEPTION during meta) 처리되지않은 오류 발생 : {}", ex.getMessage());
+        }
+        //
 
 
         FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, "RuleA,RuleB");

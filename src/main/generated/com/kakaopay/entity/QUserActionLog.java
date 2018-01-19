@@ -24,13 +24,13 @@ public class QUserActionLog extends EntityPathBase<UserActionLog> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final ListPath<MoneyChargingLog, QMoneyChargingLog> moneyChargingLogs = this.<MoneyChargingLog, QMoneyChargingLog>createList("moneyChargingLogs", MoneyChargingLog.class, QMoneyChargingLog.class, PathInits.DIRECT2);
+    public final SetPath<MoneyChargingLog, QMoneyChargingLog> moneyChargingLogs = this.<MoneyChargingLog, QMoneyChargingLog>createSet("moneyChargingLogs", MoneyChargingLog.class, QMoneyChargingLog.class, PathInits.DIRECT2);
 
-    public final ListPath<MoneyReceivingLog, QMoneyReceivingLog> moneyReceivingLogs = this.<MoneyReceivingLog, QMoneyReceivingLog>createList("moneyReceivingLogs", MoneyReceivingLog.class, QMoneyReceivingLog.class, PathInits.DIRECT2);
+    public final SetPath<MoneyReceivingLog, QMoneyReceivingLog> moneyReceivingLogs = this.<MoneyReceivingLog, QMoneyReceivingLog>createSet("moneyReceivingLogs", MoneyReceivingLog.class, QMoneyReceivingLog.class, PathInits.DIRECT2);
 
-    public final ListPath<ServiceAccountLog, QServiceAccountLog> serviceAccountLogs = this.<ServiceAccountLog, QServiceAccountLog>createList("serviceAccountLogs", ServiceAccountLog.class, QServiceAccountLog.class, PathInits.DIRECT2);
+    public final SetPath<ServiceAccountLog, QServiceAccountLog> serviceAccountLogs = this.<ServiceAccountLog, QServiceAccountLog>createSet("serviceAccountLogs", ServiceAccountLog.class, QServiceAccountLog.class, PathInits.DIRECT2);
 
-    public final ListPath<TransferLog, QTransferLog> transferLogs = this.<TransferLog, QTransferLog>createList("transferLogs", TransferLog.class, QTransferLog.class, PathInits.DIRECT2);
+    public final SetPath<TransferLog, QTransferLog> transferLogs = this.<TransferLog, QTransferLog>createSet("transferLogs", TransferLog.class, QTransferLog.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 

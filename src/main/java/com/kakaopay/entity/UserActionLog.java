@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_action_log")
@@ -33,17 +34,17 @@ public class UserActionLog implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private List<ServiceAccountLog> serviceAccountLogs;
+    private Set<ServiceAccountLog> serviceAccountLogs;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private List<TransferLog> transferLogs;
+    private Set<TransferLog> transferLogs;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private List<MoneyChargingLog> moneyChargingLogs;
+    private Set<MoneyChargingLog> moneyChargingLogs;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private List<MoneyReceivingLog> moneyReceivingLogs;
+    private Set<MoneyReceivingLog> moneyReceivingLogs;
 }
