@@ -16,7 +16,7 @@ public class MoneyChargingLog implements Serializable {
     @Getter
     private Integer id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_action_log_id")
     @Getter
     private UserActionLog userActionLog;

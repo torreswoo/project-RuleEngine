@@ -54,7 +54,7 @@ public class QMoneyReceivingLog extends EntityPathBase<MoneyReceivingLog> {
 
     public QMoneyReceivingLog(Class<? extends MoneyReceivingLog> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.userActionLog = inits.isInitialized("userActionLog") ? new QUserActionLog(forProperty("userActionLog")) : null;
+        this.userActionLog = inits.isInitialized("userActionLog") ? new QUserActionLog(forProperty("userActionLog"), inits.get("userActionLog")) : null;
     }
 
 }

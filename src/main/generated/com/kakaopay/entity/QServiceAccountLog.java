@@ -46,7 +46,7 @@ public class QServiceAccountLog extends EntityPathBase<ServiceAccountLog> {
 
     public QServiceAccountLog(Class<? extends ServiceAccountLog> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.userActionLog = inits.isInitialized("userActionLog") ? new QUserActionLog(forProperty("userActionLog")) : null;
+        this.userActionLog = inits.isInitialized("userActionLog") ? new QUserActionLog(forProperty("userActionLog"), inits.get("userActionLog")) : null;
     }
 
 }

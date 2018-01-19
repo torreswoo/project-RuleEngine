@@ -27,13 +27,13 @@ public class UserActionLogRepositoryImpl
 
         JPQLQuery query =
             from(qUserActionLog)
-                .leftJoin(qUserActionLog.serviceAccountLogs, qServiceAccountLog)
+                .leftJoin(qUserActionLog.serviceAccountLog, qServiceAccountLog)
                 .fetchJoin()
-                .leftJoin(qUserActionLog.moneyReceivingLogs, qMoneyReceivingLog)
+                .leftJoin(qUserActionLog.moneyReceivingLog, qMoneyReceivingLog)
                 .fetchJoin()
-                .leftJoin(qUserActionLog.moneyChargingLogs, qMoneyChargingLog)
+                .leftJoin(qUserActionLog.moneyChargingLog, qMoneyChargingLog)
                 .fetchJoin()
-                .leftJoin(qUserActionLog.transferLogs, qTransferLog)
+                .leftJoin(qUserActionLog.transferLog, qTransferLog)
                 .fetchJoin()
                 .where(qUserActionLog.userId.eq(userId));
 

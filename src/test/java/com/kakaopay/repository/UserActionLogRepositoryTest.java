@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = DatabaseConfig.class)
 public class UserActionLogRepositoryTest {
 
-
     @Autowired
     private UserActionLogRepository userActionLogRepository;
 

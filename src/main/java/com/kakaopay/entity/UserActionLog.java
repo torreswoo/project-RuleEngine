@@ -32,19 +32,19 @@ public class UserActionLog implements Serializable {
     @Getter
     private Long userId;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private Set<ServiceAccountLog> serviceAccountLogs;
+    private ServiceAccountLog serviceAccountLog;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private Set<TransferLog> transferLogs;
+    private TransferLog transferLog;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private Set<MoneyChargingLog> moneyChargingLogs;
+    private MoneyChargingLog moneyChargingLog;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userActionLog")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userActionLog")
     @Getter
-    private Set<MoneyReceivingLog> moneyReceivingLogs;
+    private MoneyReceivingLog moneyReceivingLog;
 }

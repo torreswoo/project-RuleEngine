@@ -18,32 +18,46 @@ public class QUserActionLog extends EntityPathBase<UserActionLog> {
 
     private static final long serialVersionUID = 1332452436L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QUserActionLog userActionLog = new QUserActionLog("userActionLog");
 
     public final DateTimePath<java.util.Date> actionTime = createDateTime("actionTime", java.util.Date.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final SetPath<MoneyChargingLog, QMoneyChargingLog> moneyChargingLogs = this.<MoneyChargingLog, QMoneyChargingLog>createSet("moneyChargingLogs", MoneyChargingLog.class, QMoneyChargingLog.class, PathInits.DIRECT2);
+    public final QMoneyChargingLog moneyChargingLog;
 
-    public final SetPath<MoneyReceivingLog, QMoneyReceivingLog> moneyReceivingLogs = this.<MoneyReceivingLog, QMoneyReceivingLog>createSet("moneyReceivingLogs", MoneyReceivingLog.class, QMoneyReceivingLog.class, PathInits.DIRECT2);
+    public final QMoneyReceivingLog moneyReceivingLog;
 
-    public final SetPath<ServiceAccountLog, QServiceAccountLog> serviceAccountLogs = this.<ServiceAccountLog, QServiceAccountLog>createSet("serviceAccountLogs", ServiceAccountLog.class, QServiceAccountLog.class, PathInits.DIRECT2);
+    public final QServiceAccountLog serviceAccountLog;
 
-    public final SetPath<TransferLog, QTransferLog> transferLogs = this.<TransferLog, QTransferLog>createSet("transferLogs", TransferLog.class, QTransferLog.class, PathInits.DIRECT2);
+    public final QTransferLog transferLog;
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public QUserActionLog(String variable) {
-        super(UserActionLog.class, forVariable(variable));
+        this(UserActionLog.class, forVariable(variable), INITS);
     }
 
     public QUserActionLog(Path<? extends UserActionLog> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QUserActionLog(PathMetadata metadata) {
-        super(UserActionLog.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QUserActionLog(PathMetadata metadata, PathInits inits) {
+        this(UserActionLog.class, metadata, inits);
+    }
+
+    public QUserActionLog(Class<? extends UserActionLog> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.moneyChargingLog = inits.isInitialized("moneyChargingLog") ? new QMoneyChargingLog(forProperty("moneyChargingLog"), inits.get("moneyChargingLog")) : null;
+        this.moneyReceivingLog = inits.isInitialized("moneyReceivingLog") ? new QMoneyReceivingLog(forProperty("moneyReceivingLog"), inits.get("moneyReceivingLog")) : null;
+        this.serviceAccountLog = inits.isInitialized("serviceAccountLog") ? new QServiceAccountLog(forProperty("serviceAccountLog"), inits.get("serviceAccountLog")) : null;
+        this.transferLog = inits.isInitialized("transferLog") ? new QTransferLog(forProperty("transferLog"), inits.get("transferLog")) : null;
     }
 
 }
