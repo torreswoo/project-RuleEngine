@@ -23,20 +23,21 @@ public class CreatingUserActionLogService {
     @Autowired
     private UserActionLogRepository userActionLogRepository;
 
+    @Autowired
+    RuleEngineManager ruleEngineManager;
+
 
     public List<UserActionLog> findAllUserActionLogByUserId(Long userId) throws Exception{
         List<UserActionLog> userActionLogList = userActionLogRepository.findAllUserActionLogByUserId(userId);
         return userActionLogList;
     }
 
-
     public String checkFDSUsingRuleEngine(Long userId, Date requestTime) throws Exception{
 
         List<UserActionLog> userActionLogList = this.findAllUserActionLogByUserId(userId);
 
         log.info("-- FDS START {}", userActionLogList);
-        RuleEngineManager ruleEngineManager = new RuleEngineManager();
-        String result = ruleEngineManager.start(userActionLogList);
+        String result = this.ruleEngineManager.start(userActionLogList, requestTime);
         log.info("-- FDS result : {}", result);
 
         return result;

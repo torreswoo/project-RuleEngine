@@ -3,12 +3,14 @@ package com.kakaopay.service.ruleEngine;
 import com.kakaopay.entity.UserActionLog;
 import com.kakaopay.service.condition.Condition;
 import com.kakaopay.service.rule.Rule;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class KakaoMoneyRuleEngine implements RuleEngine {
 
     private Map<String, Rule> ruleMap = new HashMap<String, Rule>();
@@ -23,14 +25,14 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
     }
 
     @Override
-    public void execute(List<UserActionLog> userActionLogList) {
+    public void execute(List<UserActionLog> userActionLogs) {
         // TODO: concurrency & applyFilter conditions in each rules
-
+        List<UserActionLog> userActionLogList = userActionLogs;
         for ( Map.Entry<String, Rule> entry : this.ruleMap.entrySet() ){
             Rule rule = entry.getValue();
 
             for (Condition condition : rule.getConditionList()){
-                userActionLogList = condition.applyCondition(userActionLogList);
+                if( userActionLogList != null) userActionLogList = condition.applyCondition(userActionLogList);
             }
 
             this.ruleFDSMap.put(

@@ -19,6 +19,8 @@ public class KakaoMoneyRule implements Rule{
 
     @Override
     public boolean checkFDS(List<UserActionLog> userActionLogList) {
+        if(userActionLogList == null)
+            return false;
         return this.checkCondition.test(userActionLogList);
     }
 

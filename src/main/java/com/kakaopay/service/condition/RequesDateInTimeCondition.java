@@ -8,23 +8,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class OpenAccountInTimeCondition implements Condition{
+public class RequesDateInTimeCondition implements Condition{
 
     private int searchingTimeByhour;
+    private Date requestTime;
 
-    public OpenAccountInTimeCondition(int searchingTimeByhour){
+    public RequesDateInTimeCondition(int searchingTimeByhour, Date requestTime){
         this.searchingTimeByhour = searchingTimeByhour;
+        this.requestTime = requestTime;
     }
 
     @Override
     public List<UserActionLog> applyCondition(List<UserActionLog> userActionLogList) {
 
-        // condition : 계좌개설하고 searchingTimeByhour 시간이내에사용자로그
-        List<UserActionLog> dateLog = userActionLogList
-            .stream()
-            .filter(userActionLog -> userActionLog.getServiceAccountLog() != null)
-            .collect(Collectors.toList());
-        Date startDate = dateLog.get(0).getActionTime();
+        // condition : requestTime부터 searchingTimeByhour시간이내
+        Date startDate = this.requestTime;
         Date endDate = new Date(startDate.getTime() + (1000 * 60 * 60 * this.searchingTimeByhour));
 
         List<UserActionLog> filteredLog01 = userActionLogList
@@ -34,7 +32,7 @@ public class OpenAccountInTimeCondition implements Condition{
                     userActionLog.getActionTime().compareTo(endDate) <= 0)
             .collect(Collectors.toList());
         log.info("--- open account | user actionlog count: {} ({} ~ {})", filteredLog01.size(), startDate, endDate);
-
+        
         return filteredLog01;
     }
 }
