@@ -30,6 +30,7 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
         List<UserActionLog> userActionLogList = userActionLogs;
         for ( Map.Entry<String, Rule> entry : this.ruleMap.entrySet() ){
             Rule rule = entry.getValue();
+            log.info("-----------[ {} check start ]", rule.getRuleName());
 
             for (Condition condition : rule.getConditionList()){
                 if( userActionLogList != null) userActionLogList = condition.applyCondition(userActionLogList);

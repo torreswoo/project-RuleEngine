@@ -17,7 +17,4 @@ public interface Rule {
     String getRuleName();
     void setRuleName(String ruleName);
 
-
-
-
 }

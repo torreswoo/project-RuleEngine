@@ -24,6 +24,9 @@ public class OpenAccountInTimeCondition implements Condition{
             .stream()
             .filter(userActionLog -> userActionLog.getServiceAccountLog() != null)
             .collect(Collectors.toList());
+        if( dateLog.size() == 0 )
+            return null;
+
         Date startDate = dateLog.get(0).getActionTime();
         Date endDate = new Date(startDate.getTime() + (1000 * 60 * 60 * this.searchingTimeByhour));
 

@@ -32,7 +32,7 @@ public class RequesDateInTimeCondition implements Condition{
                     userActionLog.getActionTime().compareTo(endDate) <= 0)
             .collect(Collectors.toList());
         log.info("--- open account | user actionlog count: {} ({} ~ {})", filteredLog01.size(), startDate, endDate);
-        
+
         return filteredLog01;
     }
 }

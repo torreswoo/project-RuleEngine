@@ -54,7 +54,11 @@ public class AppController {
         }
 
         // Response
-        FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, Boolean.TRUE, resultFDS);
+        FraudDetectResponse fraudDetectResponse =
+            new FraudDetectResponse(
+                user_id,
+                resultFDS.length() == 0 ? false : true,
+                resultFDS);
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
 
         return fraudDetectResponse;

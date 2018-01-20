@@ -27,7 +27,7 @@ public class MoneyChargingLog implements Serializable {
 
     @Column(name = "charging_money")
     @Getter
-    private String chargingMoney;
+    private Integer chargingMoney;
 
     @Column(name = "bank_account_number")
     @Getter

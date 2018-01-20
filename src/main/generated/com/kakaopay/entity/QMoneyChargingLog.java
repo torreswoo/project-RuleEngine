@@ -26,7 +26,7 @@ public class QMoneyChargingLog extends EntityPathBase<MoneyChargingLog> {
 
     public final StringPath bankAccountNumber = createString("bankAccountNumber");
 
-    public final StringPath chargingMoney = createString("chargingMoney");
+    public final NumberPath<Integer> chargingMoney = createNumber("chargingMoney", Integer.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 

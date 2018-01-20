@@ -1,10 +1,9 @@
 package com.kakaopay.service;
 
+import com.kakaopay.entity.MoneyReceivingLog;
+import com.kakaopay.entity.TransferLog;
 import com.kakaopay.entity.UserActionLog;
-import com.kakaopay.service.condition.Condition;
-import com.kakaopay.service.condition.OpenAccountInTimeCondition;
-import com.kakaopay.service.condition.ReceiveMoneyCondition;
-import com.kakaopay.service.condition.RequesDateInTimeCondition;
+import com.kakaopay.service.condition.*;
 import com.kakaopay.service.rule.KakaoMoneyRule;
 import com.kakaopay.service.rule.Rule;
 import com.kakaopay.service.ruleEngine.KakaoMoneyRuleEngine;
@@ -34,6 +33,26 @@ public class RuleEngineManager {
     }
 
     public void setUpRules(Date requestTime){
+
+        // RuleA
+        Condition ruleBCondition05 = new OpenAccountInTimeCondition(1);
+        Condition ruleBCondition06 = new ChargingMoneyCondition(2000000);
+        Rule ruleA = new KakaoMoneyRule("RuleA");
+        ruleA.addCondition(ruleBCondition05);
+        ruleA.addCondition(ruleBCondition06);
+        ruleA.addCheckCondition((List<UserActionLog> userActionLogs) -> {
+            for (UserActionLog userActionLog : userActionLogs) {
+                TransferLog transferLog = userActionLog.getTransferLog();
+                if(transferLog != null && transferLog.getBalanceBeforeTransfer() - transferLog.getTransferMoney() <= 1000 )
+                    return true;
+                MoneyReceivingLog moneyReceivingLog = userActionLog.getMoneyReceivingLog();
+                if(moneyReceivingLog != null && moneyReceivingLog.getBalanceBeforeReceiving() + moneyReceivingLog.getReceivingMoney() <= 1000 )
+                    return true;
+            }
+            return false;
+        });
+        this.kakaoRuleEngine.addRule(ruleA);
+
         // RuleB
         Condition ruleBCondition01 = new OpenAccountInTimeCondition(7*24);
         Condition ruleBCondition02 = new ReceiveMoneyCondition(100000);
