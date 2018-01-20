@@ -18,25 +18,22 @@ public class CreatingUserActionLogService {
     @Autowired
     private UserActionLogRepository userActionLogRepository;
 
-    public List<UserActionLog> findAllUserActionLogByUserId(Long userId){
 
-        return userActionLogRepository.findAllByUserId(userId);
-    }
-
-    public List<UserActionLog> test(Long userId, Date testTime) throws Exception{
-        List<UserActionLog> userActionLogList = userActionLogRepository.test(userId, testTime);
+    public List<UserActionLog> findAllUserActionLogByUserId(Long userId) throws Exception{
+        List<UserActionLog> userActionLogList = userActionLogRepository.findAllUserActionLogByUserId(userId);
         return userActionLogList;
     }
 
     //
-    public String checkFDSUsingRuleEngine(Long userId, Date testTime) throws Exception{
+    public String checkFDSUsingRuleEngine(Long userId, Date requestTime) throws Exception{
 
         // 01. user_id get actionlog
-        List<UserActionLog> userActionLogList = this.test(userId, testTime);
+        List<UserActionLog> userActionLogList = this.findAllUserActionLogByUserId(userId);
         log.info("---test {}", userActionLogList);
 
         // 02. check Rules
-        // 02-01. RuleB
+        // 02-01. RuleB : 계좌개설하고 한시간이내
+        //
         List<UserActionLog> dateLog = userActionLogList
             .stream()
             .filter(userActionLog -> userActionLog.getServiceAccountLog() != null)
@@ -53,6 +50,8 @@ public class CreatingUserActionLogService {
                     userActionLog.getActionTime().compareTo(endDate) <= 0)
             .collect(Collectors.toList());
         log.info("---test filteredLog01 | size : {}", filteredLog01.size());
+
+        // 02-02. RuleB : 10만원 금액 받음 5회이상
         //
         List<UserActionLog> filteredLog02 = filteredLog01
             .stream()
@@ -60,7 +59,6 @@ public class CreatingUserActionLogService {
                     userActionLog.getMoneyReceivingLog() != null &&
                     userActionLog.getMoneyReceivingLog().getReceivingMoney() >= 100000)
             .collect(Collectors.toList());
-
         //
         log.info("---test filteredLog02 | size : {}", filteredLog02.size());
         if (filteredLog02.size() >= 5) {

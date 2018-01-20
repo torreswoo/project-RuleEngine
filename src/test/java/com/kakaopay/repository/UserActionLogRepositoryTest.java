@@ -39,7 +39,7 @@ public class UserActionLogRepositoryTest {
         Date testTime = new Date();
 
         // when
-        List<UserActionLog> userActionLogs = userActionLogRepository.test(userID, testTime);
+        List<UserActionLog> userActionLogs = userActionLogRepository.findAllUserActionLogByUserId(userID);
 
         // then
         assertThat(userActionLogs.size()).isEqualTo(8);

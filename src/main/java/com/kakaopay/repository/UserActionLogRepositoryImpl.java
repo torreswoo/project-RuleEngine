@@ -16,7 +16,7 @@ public class UserActionLogRepositoryImpl
     }
 
     @Override
-    public List<UserActionLog> test(Long userId, Date testTime) throws Exception{
+    public List<UserActionLog> findAllUserActionLogByUserId(Long userId) throws Exception{
 
         QUserActionLog qUserActionLog = QUserActionLog.userActionLog;
 

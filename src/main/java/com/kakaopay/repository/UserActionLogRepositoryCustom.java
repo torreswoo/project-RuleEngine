@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserActionLogRepositoryCustom {
 
-    List<UserActionLog> test(Long userId, Date testTime) throws Exception;
+    List<UserActionLog> findAllUserActionLogByUserId(Long userId) throws Exception;
 }

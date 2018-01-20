@@ -43,13 +43,13 @@ public class AppController {
 
         try {
             // TEST: check all UserAction
-            Date testTime = new Date();
-            log.info(" --- time : {}", testTime.getTime());
+            Date requestTime = new Date();
+            log.info(" --- time : {}", requestTime.getTime());
 //            List<UserActionLog> userActionLogList = creatingUserActionLogService.test(user_id, testTime);
 //            log.info(" - {}", userActionLogList.size());
 //            userActionLogList.stream().forEach(log -> System.out.println(log));
 
-            this.creatingUserActionLogService.checkFDSUsingRuleEngine(user_id, testTime);
+            this.creatingUserActionLogService.checkFDSUsingRuleEngine(user_id, requestTime);
         }catch (Exception ex){
             log.error("(SEND EXCEPTION during meta) 처리되지않은 오류 발생 : {}", ex.getMessage());
         }
