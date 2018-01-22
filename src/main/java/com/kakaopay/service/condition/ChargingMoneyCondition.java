@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class ChargingMoneyCondition implements Condition{
+public class ChargingMoneyCondition implements Condition<List<UserActionLog>>{
 
     private int chargingMoney;
 

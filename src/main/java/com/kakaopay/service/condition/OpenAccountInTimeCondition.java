@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class OpenAccountInTimeCondition implements Condition{
+public class OpenAccountInTimeCondition implements Condition<List<UserActionLog>>{
 
     private int searchingTimeByhour;
 

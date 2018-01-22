@@ -3,6 +3,9 @@ package com.kakaopay.app;
 
 import com.kakaopay.AppSpringBootInterface;
 import com.kakaopay.AppSpringBootMain;
+import com.kakaopay.config.RuleConfig;
+import com.kakaopay.service.RuleEngineManager;
+import com.kakaopay.service.ruleEngine.RuleEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,15 +14,13 @@ public class AppMain
     extends AppSpringBootMain
     implements AppSpringBootInterface {
 
-//    @Autowired
-//    private IpInfoManager ipInfoManager;
+    @Autowired
+    private RuleConfig ruleConfig;
 
     @Override
     public void start() {
-//        this.ipInfoManager.updateGeolocationIpInfo();
-//        this.ipInfoManager.updateBlackListIpInfo();
-//        this.ipInfoManager.updateWhitelistIpInfo();
         log.info("[START] start App server...");
+        this.ruleConfig.setUpBasicRules();
     }
 
     @Override

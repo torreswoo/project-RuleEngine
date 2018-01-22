@@ -36,9 +36,9 @@ public class CreatingUserActionLogService {
 
         List<UserActionLog> userActionLogList = this.findAllUserActionLogByUserId(userId);
 
-        log.info("-- FDS START {}", userActionLogList);
+        log.info("FDS START {}", userActionLogList);
         String result = this.ruleEngineManager.start(userActionLogList, requestTime);
-        log.info("-- FDS result : {}", result);
+        log.info("FDS result : {}", result);
 
         return result;
     }

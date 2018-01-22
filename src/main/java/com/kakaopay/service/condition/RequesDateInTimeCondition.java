@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class RequesDateInTimeCondition implements Condition{
+public class RequesDateInTimeCondition implements Condition<List<UserActionLog>>{
 
     private int searchingTimeByhour;
     private Date requestTime;

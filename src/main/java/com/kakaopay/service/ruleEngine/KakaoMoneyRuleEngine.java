@@ -36,7 +36,7 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
 
             for (Condition condition : rule.getConditionList()){
                 if( userActionLogList != null)
-                    userActionLogList = condition.applyCondition(userActionLogList);
+                    userActionLogList = (List<UserActionLog>)condition.applyCondition(userActionLogList);
             }
 
             this.ruleFDSMap.put(
