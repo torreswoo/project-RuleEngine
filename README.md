@@ -9,15 +9,36 @@
 $ ./gradlew build
 $ ./gradlew bootrun
 ```
-
 ---
+
+## example (resources/data.sql)
+- user_id 10021이 계좌개설하고 7일이내 10만원금액을 5번 받음
+```
+$ curl -X GET 'http://localhost:8080/v1/fraud/10021'
+{
+  "user_id": 10021,
+  "is_fraud": true,
+  "rule": "RuleB"
+}
+
+$ curl -X GET 'http://localhost:8080/v1/fraud/10023'
+{
+  "user_id": 10023,
+  "is_fraud": false,
+  "rule": ""
+}
+
+```
+---
+
 ## dashboard
 ```
 - http://localhost:8080/          # Swagger
-- http://localhost:8080/intro     # intro page (Thymeleaf)
 - http://localhost:8080/dashboard # App Dashboard
 - http://localhost:8080/console   # H2 console (URL : jdbc:h2:mem:mydb / username : sa)
 ```
+
+
 
 ---
 ## Library

@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-public class AppController {
+public class AppApiController {
 
     @Autowired
     private CreatingUserActionLogService creatingUserActionLogService;
@@ -62,13 +62,6 @@ public class AppController {
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
 
         return fraudDetectResponse;
-    }
-
-    // Config - Swagger
-    @ApiOperation(value = "Swagger UI main", hidden= true)
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public RedirectView swaggerRedirect(){
-        return new RedirectView("/swagger-ui.html");
     }
 
 }
