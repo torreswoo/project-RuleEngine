@@ -4,8 +4,6 @@ package com.kakaopay.app;
 import com.kakaopay.AppSpringBootInterface;
 import com.kakaopay.AppSpringBootMain;
 import com.kakaopay.config.RuleConfig;
-import com.kakaopay.service.RuleEngineManager;
-import com.kakaopay.service.ruleEngine.RuleEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

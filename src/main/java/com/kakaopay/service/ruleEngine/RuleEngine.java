@@ -9,6 +9,6 @@ import java.util.Map;
 public interface RuleEngine {
 
     void addRule(Rule rule);
-    void execute(List<UserActionLog> userActionLogList);
+    void execute(List<UserActionLog> userActionLogList) throws Exception;
     String resultFDSfromRuleEngine();
 }

@@ -35,7 +35,7 @@ public class RuleEngineManager {
         this.kakaoRuleEngine.addRule(rule);
     }
 
-    public String start(List<UserActionLog> userActionLogList, Date requestTime){
+    public String start(List<UserActionLog> userActionLogList, Date requestTime) throws Exception{
         // setup Runtime Rules
         this.ruleConfig.setUpRuntimeRules(requestTime);
 
@@ -44,52 +44,4 @@ public class RuleEngineManager {
         return this.kakaoRuleEngine.resultFDSfromRuleEngine();
 
     }
-
-//    public void setUpBasicRules(){
-//
-//        // RuleA
-//        Rule ruleA = new KakaoMoneyRule("RuleA");
-//
-//        Condition ruleACondition01 = new OpenAccountInTimeCondition(1);
-//        Condition ruleACondition02 = new ChargingMoneyCondition(2000000);
-//        CheckCondition ruleACheckCondition = new CheckBalance(1000);
-//
-//        ruleA.addCondition(ruleACondition01);
-//        ruleA.addCondition(ruleACondition02);
-//        ruleA.addCheckCondition(ruleACheckCondition.getCheckCondition());
-//        this.kakaoRuleEngine.addRule(ruleA);
-//
-//        // RuleB
-//        Rule ruleB = new KakaoMoneyRule("RuleB");
-//
-//        Condition ruleBCondition01 = new OpenAccountInTimeCondition(7*24);
-//        Condition ruleBCondition02 = new ReceiveMoneyCondition(100000);
-//        CheckCondition ruleBCheckCondition = new CheckNumber(5);
-//
-//        ruleB.addCondition(ruleBCondition01);
-//        ruleB.addCondition(ruleBCondition02);
-//        ruleB.addCheckCondition(ruleBCheckCondition.getCheckCondition());
-//        this.kakaoRuleEngine.addRule(ruleB);
-//
-//        log.info("[RULE ENGINE] set up basic rules...");
-//
-//    }
-//
-//    public void setUpRuntimeRules(Date requestTime){
-//
-//        // RuleC
-//        Rule ruleC = new KakaoMoneyRule("RuleC");
-//
-//        Condition ruleCCondition01 = new RequesDateInTimeCondition(2, requestTime);
-//        Condition ruleCCondition02 = new ReceiveMoneyCondition(50000);
-//        CheckCondition ruleCCheckCondition = new CheckNumber(3);
-//
-//        ruleC.addCondition(ruleCCondition01);
-//        ruleC.addCondition(ruleCCondition02);
-//        ruleC.addCheckCondition(ruleCCheckCondition.getCheckCondition());
-//        this.kakaoRuleEngine.addRule(ruleC);
-//
-//        log.info("[RULE ENGINE] set up runtime rules...");
-//
-//    }
 }
