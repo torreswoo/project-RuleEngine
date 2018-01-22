@@ -4,6 +4,7 @@ import com.kakaopay.entity.UserActionLog;
 import com.kakaopay.service.condition.Condition;
 import com.kakaopay.service.rule.Rule;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.*;
@@ -17,12 +18,9 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
     private Map<String, Rule> ruleMap = new HashMap<String, Rule>();
     private Map<String, Boolean> ruleFDSMap = new HashMap<String, Boolean>();
 
-    private int ruleCount = 3;
-    private ExecutorService ruleEngineProcessingThreadPool;
+    @Value("${rule.count}") private int ruleCount;
 
-    public KakaoMoneyRuleEngine(){
-        this.ruleEngineProcessingThreadPool = Executors.newFixedThreadPool(this.ruleCount);
-    }
+    public KakaoMoneyRuleEngine(){ }
 
     @Override
     public void addRule(Rule rule) {
@@ -31,7 +29,6 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
 
     @Override
     public void execute(List<UserActionLog> userActionLogs) throws Exception {
-
 
         List<CompletableFuture> completableFutureList = new ArrayList<CompletableFuture>();
         for (String key: this.ruleMap.keySet()){
@@ -42,7 +39,13 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
             .allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]))
             .join();
 
-        int i=0;
+
+//        this.ruleMap.keySet().forEach( key -> {
+//            completableFutureList.forEach(future ->
+//                this.ruleFDSMap.put(key, ((Map<String, Boolean>)future.get(key)) );
+//        });
+
+        int  i=0;
         for (String key: this.ruleMap.keySet()){
             this.ruleFDSMap.put(key, ((Map<String, Boolean>)completableFutureList.get(i++).get()).get(key) );
         }
