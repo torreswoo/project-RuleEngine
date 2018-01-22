@@ -24,7 +24,7 @@ public class CreatingUserActionLogService {
     private UserActionLogRepository userActionLogRepository;
 
     @Autowired
-    RuleEngineManager ruleEngineManager;
+    private RuleEngineManager ruleEngineManager;
 
 
     public List<UserActionLog> findAllUserActionLogByUserId(Long userId) throws Exception{

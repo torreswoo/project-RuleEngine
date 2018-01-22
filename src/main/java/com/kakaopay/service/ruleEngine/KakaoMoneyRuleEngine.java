@@ -39,12 +39,6 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
             .allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]))
             .join();
 
-
-//        this.ruleMap.keySet().forEach( key -> {
-//            completableFutureList.forEach(future ->
-//                this.ruleFDSMap.put(key, ((Map<String, Boolean>)future.get(key)) );
-//        });
-
         int  i=0;
         for (String key: this.ruleMap.keySet()){
             this.ruleFDSMap.put(key, ((Map<String, Boolean>)completableFutureList.get(i++).get()).get(key) );
