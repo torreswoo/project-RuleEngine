@@ -17,14 +17,15 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
     private Map<String, Rule> ruleMap;
     private Map<String, Boolean> ruleFDSMap;
     private ExecutorService execService;
+    private int ruleCount;
+    private int ruleThreadpolSize;
 
-    @Value("${rule.count}")           private int ruleCount;
-    @Value("${rule.threadpool.size}") private int ruleThreadpolSize;
-
-    public KakaoMoneyRuleEngine(){
+    public KakaoMoneyRuleEngine(int ruleCount, int ruleThreadpolSize){
         this.ruleMap = new HashMap<String, Rule>();
         this.ruleFDSMap = new ConcurrentHashMap<String, Boolean>();
-        this.execService = Executors.newFixedThreadPool(ruleThreadpolSize);
+        this.execService = Executors.newFixedThreadPool(10);
+        this.ruleCount = ruleCount;
+        this.ruleThreadpolSize = ruleThreadpolSize;
     }
 
     @Override

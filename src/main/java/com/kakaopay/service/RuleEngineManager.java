@@ -12,6 +12,7 @@ import com.kakaopay.service.ruleEngine.RuleEngine;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -28,8 +29,11 @@ public class RuleEngineManager {
     @Getter
     private RuleEngine kakaoRuleEngine;
 
+    @Value("${rule.count}")           private int ruleCount;
+    @Value("${rule.threadpool.size}") private int ruleThreadpolSize;
+
     public RuleEngineManager(){
-        this.kakaoRuleEngine = new KakaoMoneyRuleEngine();
+        this.kakaoRuleEngine = new KakaoMoneyRuleEngine(ruleCount, ruleThreadpolSize);
     }
 
     public void addRule(Rule rule){
