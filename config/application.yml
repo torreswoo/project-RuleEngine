@@ -26,6 +26,8 @@ spring.jpa:
 
 rule:
   count: 3
+  threadpool:
+    size: 10
   ruleA:
     name: RuleA
   ruleB:

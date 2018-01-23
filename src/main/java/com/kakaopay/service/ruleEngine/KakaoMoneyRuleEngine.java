@@ -9,58 +9,41 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 @Slf4j
 public class KakaoMoneyRuleEngine implements RuleEngine {
 
-    private Map<String, Rule> ruleMap = new HashMap<String, Rule>();
-    private Map<String, Boolean> ruleFDSMap = new HashMap<String, Boolean>();
+    private Map<String, Rule> ruleMap;
+    private Map<String, Boolean> ruleFDSMap;
+    private ExecutorService execService;
 
-    @Value("${rule.count}") private int ruleCount;
+    @Value("${rule.count}")           private int ruleCount;
+    @Value("${rule.threadpool.size}") private int ruleThreadpolSize;
 
-    public KakaoMoneyRuleEngine(){ }
+    public KakaoMoneyRuleEngine(){
+        this.ruleMap = new HashMap<String, Rule>();
+        this.ruleFDSMap = new ConcurrentHashMap<String, Boolean>();
+        this.execService = Executors.newFixedThreadPool(ruleThreadpolSize);
+    }
 
     @Override
     public void execute(List<UserActionLog> userActionLogs) throws Exception {
 
-        List<CompletableFuture> completableFutureList = new ArrayList<CompletableFuture>();
+        // execute - threadpool & worker
+        List<Future<Map<String, Boolean>>> futureList = new ArrayList<Future<Map<String, Boolean>>>();
         for (String key: this.ruleMap.keySet()){
-            completableFutureList.add(executeRule(this.ruleMap.get(key), userActionLogs));
+            futureList.add(
+                execService.submit(
+                    new KakaoMoneyRuleEngineWorker(this.ruleMap.get(key), userActionLogs )
+                )
+            );
         }
 
-        CompletableFuture
-            .allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]))
-            .join();
-
-        int  i=0;
-        for (String key: this.ruleMap.keySet()){
-            this.ruleFDSMap.put(key, ((Map<String, Boolean>)completableFutureList.get(i++).get()).get(key) );
+        for (Future<Map<String, Boolean>> future : futureList) {
+            ruleFDSMap.putAll(future.get());
         }
 
-    }
-
-    @Async
-    public CompletableFuture executeRule(Rule rule, List<UserActionLog> userActionLogs) throws InterruptedException {
-
-        List<UserActionLog> userActionLogList = userActionLogs;
-        Map<String, Boolean> resultMap = new HashMap<String, Boolean>();
-
-        log.info(" [ {} check start ]", rule.getRuleName());
-
-        for (Condition condition : rule.getConditionList()){
-            if( userActionLogList != null)
-                userActionLogList = (List<UserActionLog>)condition.applyCondition(userActionLogList);
-        }
-
-        resultMap.put(
-            rule.getRuleName(),
-            rule.checkFDS(userActionLogList)
-        );
-
-        return CompletableFuture.completedFuture(resultMap);
     }
 
     @Override
