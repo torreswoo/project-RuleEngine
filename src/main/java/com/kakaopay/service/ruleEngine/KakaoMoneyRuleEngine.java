@@ -3,6 +3,7 @@ package com.kakaopay.service.ruleEngine;
 import com.kakaopay.entity.UserActionLog;
 import com.kakaopay.service.condition.Condition;
 import com.kakaopay.service.rule.Rule;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -23,11 +24,6 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
     public KakaoMoneyRuleEngine(){ }
 
     @Override
-    public void addRule(Rule rule) {
-        ruleMap.put(rule.getRuleName(), rule);
-    }
-
-    @Override
     public void execute(List<UserActionLog> userActionLogs) throws Exception {
 
         List<CompletableFuture> completableFutureList = new ArrayList<CompletableFuture>();
@@ -44,17 +40,6 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
             this.ruleFDSMap.put(key, ((Map<String, Boolean>)completableFutureList.get(i++).get()).get(key) );
         }
 
-    }
-
-    @Override
-    public String resultFDSfromRuleEngine() {
-        String result="";
-        for ( Map.Entry<String, Boolean> entry : this.ruleFDSMap.entrySet() ){
-            if(entry.getValue() == true){
-                result = result + entry.getKey();
-            }
-        }
-        return result;
     }
 
     @Async
@@ -76,9 +61,35 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
         );
 
         return CompletableFuture.completedFuture(resultMap);
-
     }
 
+    @Override
+    public String getFDSresult() {
+        String result="";
+        for ( Map.Entry<String, Boolean> entry : this.ruleFDSMap.entrySet() ){
+            if(entry.getValue() == true){
+                result = result + entry.getKey();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void addRule(Rule rule) {
+        ruleMap.put(rule.getRuleName(), rule);
+    }
+
+    public Map<String, Rule> getRuleMap(){
+        return this.ruleMap;
+    }
+
+    public Map<String, Boolean> getRuleFDSMap(){
+        return this.ruleFDSMap;
+    }
+
+    public void setRuleFDSMap(Map<String, Boolean> ruleFDSMap){
+        this.ruleFDSMap = ruleFDSMap;
+    }
 
 
 }

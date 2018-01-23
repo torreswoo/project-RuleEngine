@@ -9,6 +9,7 @@ import com.kakaopay.service.rule.KakaoMoneyRule;
 import com.kakaopay.service.rule.Rule;
 import com.kakaopay.service.ruleEngine.KakaoMoneyRuleEngine;
 import com.kakaopay.service.ruleEngine.RuleEngine;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,12 @@ public class RuleEngineManager {
     @Autowired
     private RuleConfig ruleConfig;
 
+    @Getter
     private RuleEngine kakaoRuleEngine;
 
     public RuleEngineManager(){
         this.kakaoRuleEngine = new KakaoMoneyRuleEngine();
     }
-
 
     public void addRule(Rule rule){
         this.kakaoRuleEngine.addRule(rule);
@@ -37,11 +38,15 @@ public class RuleEngineManager {
 
     public String start(List<UserActionLog> userActionLogList, Date requestTime) throws Exception{
         // setup Runtime Rules
-        this.ruleConfig.setUpRuntimeRules(requestTime);
+        ruleConfig.setUpRuntimeRules(requestTime);
 
-        // execute Rule Engine
-        this.kakaoRuleEngine.execute(userActionLogList);
-        return this.kakaoRuleEngine.resultFDSfromRuleEngine();
+        // [Rule Engine] execute to check rules
+        kakaoRuleEngine.execute(userActionLogList);
+
+        // [Rule Engine] get the result
+        String resultFDSrules = kakaoRuleEngine.getFDSresult();
+
+        return resultFDSrules;
 
     }
 }

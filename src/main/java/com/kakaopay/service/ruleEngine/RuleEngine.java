@@ -10,5 +10,5 @@ public interface RuleEngine {
 
     void addRule(Rule rule);
     void execute(List<UserActionLog> userActionLogList) throws Exception;
-    String resultFDSfromRuleEngine();
+    String getFDSresult();
 }
