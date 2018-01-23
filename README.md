@@ -29,6 +29,11 @@ $ curl -X GET 'http://localhost:8080/v1/fraud/10023'
 }
 
 ```
+![swagger-ui](/docs/images/swagger_ui.png)
+
+## processing log
+![multithread-processing](/docs/images/multithread_processing.png)
+
 ---
 
 ## dashboard
@@ -37,7 +42,7 @@ $ curl -X GET 'http://localhost:8080/v1/fraud/10023'
 - http://localhost:8080/dashboard # App Dashboard
 - http://localhost:8080/console   # H2 console (URL : jdbc:h2:mem:mydb / username : sa)
 ```
-
+![springboot-jolokia-dashboard](/docs/images/dashboard01.png)
 
 
 ---
