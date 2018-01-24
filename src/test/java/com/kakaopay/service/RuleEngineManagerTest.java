@@ -55,10 +55,10 @@ public class RuleEngineManagerTest {
 
 
         // when
-        String result = ruleEngineManager.start(userActionLogList, requestTime);
+        String result = ruleEngineManager.startFDS(userActionLogList, requestTime);
 
         // then
-//        assertThat(result).isEqualTo("RuleB");
+        assertThat(result).isEqualTo("RuleB");
 
     }
 

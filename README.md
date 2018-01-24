@@ -1,7 +1,12 @@
 # Rule Engine
 - Gradle기반 프로젝트
 - 여러개의 Rule을 추가 및 유지보수를 고려한 Flexible한 룰 엔진 구현
-- Rest API 구현
+- Rest API 구현.
+- RuleConfig에서 초기 룰을 세팅.
+- Rule은 여러개의 Condition으로 구성됨. 최종적으로 CheckCondition을 통해, FDS를 판단.
+- RuleEngineManager가 세팅된 룰들을 가지고 user_id에 FDS체크.
+- RuleEngine은 내부적으로 threadpool을 가지고 각각의 룰FDS체크를 multithread로 동작함.
+- 애플리케이션 실행시 H2 DB에 초기 데이터가 세팅되어 테스트함(data.sql)
 
 ## Start project
 - build, run

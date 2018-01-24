@@ -38,29 +38,19 @@ public class AppApiController {
         @ApiResponse(code = 500, message = "Internal Server Error") })
     public @ResponseBody FraudDetectResponse fraudDetectResponse(@PathVariable Long user_id){
 
-        // Request
         Date requestTime = new Date();
         String resultFDS = "";
-        // TODO: check user_id is LONG?
         log.info("[REQ] {} - start check Fraud Detection. REQUEST TIME:{}", user_id, requestTime.getTime());
 
-        // logic
         try {
-            // TEST: check all UserAction
             resultFDS = this.creatingUserActionLogService.checkFDSUsingRuleEngine(user_id, requestTime);
         }catch (Exception ex){
             log.error("(SEND EXCEPTION during meta) 처리되지않은 오류 발생 : {}", ex.getMessage());
             ex.printStackTrace();
         }
 
-        // Response
-        FraudDetectResponse fraudDetectResponse =
-            new FraudDetectResponse(
-                user_id,
-                resultFDS.length() == 0 ? false : true,
-                resultFDS);
+        FraudDetectResponse fraudDetectResponse = new FraudDetectResponse(user_id, resultFDS.length() == 0 ? false : true, resultFDS);
         log.info("[RES] {} - fraud result : {}", user_id, fraudDetectResponse.getIs_fraud());
-
         return fraudDetectResponse;
     }
 

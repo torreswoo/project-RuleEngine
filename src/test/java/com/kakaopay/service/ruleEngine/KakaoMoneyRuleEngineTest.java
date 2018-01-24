@@ -36,7 +36,7 @@ public class KakaoMoneyRuleEngineTest {
     public void setUp() throws Exception{
         MockitoAnnotations.initMocks(this);
         assertThat(userActionLogRepository).isNotNull();
-        ruleEngine = new KakaoMoneyRuleEngine(3, 10);
+        ruleEngine = new KakaoMoneyRuleEngine(3);
 
     }
 

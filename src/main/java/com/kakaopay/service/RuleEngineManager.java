@@ -29,18 +29,18 @@ public class RuleEngineManager {
     @Getter
     private RuleEngine kakaoRuleEngine;
 
-    @Value("${rule.count}")           private int ruleCount;
-    @Value("${rule.threadpool.size}") private int ruleThreadpolSize;
+    @Value("${rule.count}")
+    private int ruleCount;
 
     public RuleEngineManager(){
-        this.kakaoRuleEngine = new KakaoMoneyRuleEngine(ruleCount, ruleThreadpolSize);
+        this.kakaoRuleEngine = new KakaoMoneyRuleEngine(ruleCount);
     }
 
     public void addRule(Rule rule){
         this.kakaoRuleEngine.addRule(rule);
     }
 
-    public String start(List<UserActionLog> userActionLogList, Date requestTime) throws Exception{
+    public String startFDS(List<UserActionLog> userActionLogList, Date requestTime) throws Exception{
         // setup Runtime Rules
         ruleConfig.setUpRuntimeRules(requestTime);
 
@@ -51,6 +51,9 @@ public class RuleEngineManager {
         String resultFDSrules = kakaoRuleEngine.getFDSresult();
 
         return resultFDSrules;
+    }
 
+    public void stop(){
+        kakaoRuleEngine.shutdown();
     }
 }

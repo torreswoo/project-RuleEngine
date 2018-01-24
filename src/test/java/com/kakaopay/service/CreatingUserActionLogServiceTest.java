@@ -50,7 +50,7 @@ public class CreatingUserActionLogServiceTest {
         Date requestTime = new Date(); requestTime.setTime(new Long(1230021));
         List<UserActionLog> userActionLogList = new ArrayList<UserActionLog>();
         when(creatingUserActionLogService.findAllUserActionLogByUserId(userId)).thenReturn(userActionLogList);
-        when(ruleEngineManager.start(userActionLogList, requestTime)).thenReturn("RuleB");
+        when(ruleEngineManager.startFDS(userActionLogList, requestTime)).thenReturn("RuleB");
 
         // when
         String result = creatingUserActionLogService.checkFDSUsingRuleEngine(userId, requestTime);

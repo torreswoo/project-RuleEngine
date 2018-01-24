@@ -18,14 +18,12 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
     private Map<String, Boolean> ruleFDSMap;
     private ExecutorService execService;
     private int ruleCount;
-    private int ruleThreadpolSize;
 
-    public KakaoMoneyRuleEngine(int ruleCount, int ruleThreadpolSize){
+    public KakaoMoneyRuleEngine(int ruleCount){
         this.ruleMap = new HashMap<String, Rule>();
         this.ruleFDSMap = new ConcurrentHashMap<String, Boolean>();
-        this.execService = Executors.newFixedThreadPool(10);
         this.ruleCount = ruleCount;
-        this.ruleThreadpolSize = ruleThreadpolSize;
+        this.execService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     }
 
     @Override
@@ -63,6 +61,11 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
         ruleMap.put(rule.getRuleName(), rule);
     }
 
+    @Override
+    public void shutdown(){
+        execService.shutdownNow();
+    }
+
     public Map<String, Rule> getRuleMap(){
         return this.ruleMap;
     }
@@ -74,6 +77,7 @@ public class KakaoMoneyRuleEngine implements RuleEngine {
     public void setRuleFDSMap(Map<String, Boolean> ruleFDSMap){
         this.ruleFDSMap = ruleFDSMap;
     }
+
 
 
 }
