@@ -40,7 +40,6 @@ public class SwaggerConfig {
             .apiInfo(apiInfo())
             .select()
             .apis(RequestHandlerSelectors.basePackage(_basePackage))
-//          .paths(PathSelectors.regex("/abt/*"))
             .paths(PathSelectors.any())
             .build();
     }

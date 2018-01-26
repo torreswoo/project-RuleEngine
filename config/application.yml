@@ -17,8 +17,7 @@ spring.datasource:
   validationQueryTimeout: 5
 
 spring.jpa:
-#  database: H2
-  database: MYSQL
+  database: H2
   show-sql: false
   properties.hibernate.hbm2ddl.auto: create  # update, none, verify
   properties.hibernate.format_sql: true
